@@ -21,17 +21,7 @@ export const cars = [
       fuel: "Gas",
       image: "/cars/Toyota-Camry-Lineup-2405.avif"
     },
-    {
-      name: "Toyota Camry Hybrid",
-      category: "Sedan",
-      price: 30000,
-      mpg: 52,
-      seats: 5,
-      horsepower: 208,
-      drivetrain: "FWD",
-      fuel: "Hybrid",
-      image: "/cars/camry-hybrid.webp"
-    },
+
     {
       name: "Toyota Prius",
       category: "Hybrid",
@@ -87,17 +77,7 @@ export const cars = [
       fuel: "Gas",
       image: "/cars/rav4.avif"
     },
-    {
-      name: "Toyota RAV4 Hybrid",
-      category: "SUV",
-      price: 34000,
-      mpg: 41,
-      seats: 5,
-      horsepower: 219,
-      drivetrain: "AWD",
-      fuel: "Hybrid",
-      image: "/cars/rav4.avif"
-    },
+
     {
       name: "Toyota Highlander",
       category: "SUV",
