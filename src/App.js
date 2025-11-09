@@ -7,6 +7,7 @@ import ChatBot from "./components/ChatBot";
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import IntroAnimation from "./components/IntroAnimation";
+import PageTransition from "./components/PageTransition";
 import "./App.css";
 
 function App() {
@@ -17,11 +18,11 @@ function App() {
           <BrowserRouter>
             <Navbar />
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/gallery" element={<CarGallery />} />
-              <Route path="/chat" element={<ChatBot />} />
-              <Route path="/assistant" element={<ChatBot />} />
-              <Route path="/catalog" element={<Catalog />} />
+              <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+              <Route path="/gallery" element={<PageTransition><CarGallery /></PageTransition>} />
+              <Route path="/chat" element={<PageTransition><ChatBot /></PageTransition>} />
+              <Route path="/assistant" element={<PageTransition><ChatBot /></PageTransition>} />
+              <Route path="/catalog" element={<PageTransition><Catalog /></PageTransition>} />
             </Routes>
           </BrowserRouter>
         </div>

@@ -28,6 +28,8 @@
     color: var(--ink);
     padding-top: 80px;
     transition: background 0.3s ease;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   [data-theme="dark"] .chat {

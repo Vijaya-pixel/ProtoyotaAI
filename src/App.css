@@ -9,6 +9,11 @@
   background: #0f172a;
 }
 
+.app-content {
+  overflow-x: hidden;
+  position: relative;
+}
+
 .home-header {
   display: flex;
   justify-content: center;
