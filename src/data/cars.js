@@ -8,7 +8,7 @@ export const cars = [
       horsepower: 139,
       drivetrain: "FWD",
       fuel: "Gas",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/corolla/SE/NIGHTSHADE/3.png"
+      image: "/cars/corlla.avif"
     },
     {
       name: "Toyota Camry",
@@ -19,7 +19,7 @@ export const cars = [
       horsepower: 203,
       drivetrain: "FWD",
       fuel: "Gas",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/camry/XSE_V6/3.png"
+      image: "/cars/Toyota-Camry-Lineup-2405.avif"
     },
     {
       name: "Toyota Camry Hybrid",
@@ -30,7 +30,7 @@ export const cars = [
       horsepower: 208,
       drivetrain: "FWD",
       fuel: "Hybrid",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/camryhybrid/XLE/2.png"
+      image: "/cars/camry-hybrid.webp"
     },
     {
       name: "Toyota Prius",
@@ -41,7 +41,7 @@ export const cars = [
       horsepower: 194,
       drivetrain: "FWD",
       fuel: "Hybrid",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/prius/LIMITED/3.png"
+      image: "/cars/2301-Toyota-Prius-Thumb.avif"
     },
     {
       name: "Toyota Crown",
@@ -52,7 +52,7 @@ export const cars = [
       horsepower: 340,
       drivetrain: "AWD",
       fuel: "Hybrid",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/crown/PLATINUM/2.png"
+      image: "/cars/crown.avif"
     },
     {
       name: "Toyota GR86",
@@ -63,7 +63,7 @@ export const cars = [
       horsepower: 228,
       drivetrain: "RWD",
       fuel: "Gas",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/gr86/TRUENO/2.png"
+      image: "/cars/gr86.avif"
     },
     {
       name: "Toyota GR Supra",
@@ -74,7 +74,7 @@ export const cars = [
       horsepower: 382,
       drivetrain: "RWD",
       fuel: "Gas",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/supra/3_0_PREMIUM/2.png"
+      image: "/cars/supra.avif"
     },
     {
       name: "Toyota RAV4",
@@ -85,7 +85,7 @@ export const cars = [
       horsepower: 203,
       drivetrain: "AWD",
       fuel: "Gas",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/rav4/XLE/2.png"
+      image: "/cars/rav4.avif"
     },
     {
       name: "Toyota RAV4 Hybrid",
@@ -96,7 +96,7 @@ export const cars = [
       horsepower: 219,
       drivetrain: "AWD",
       fuel: "Hybrid",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/rav4hybrid/XSE/3.png"
+      image: "/cars/rav4.avif"
     },
     {
       name: "Toyota Highlander",
@@ -107,7 +107,7 @@ export const cars = [
       horsepower: 295,
       drivetrain: "AWD",
       fuel: "Gas",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/highlander/XLE/2.png"
+      image: "/cars/highlander.webp"
     },
     {
       name: "Toyota Grand Highlander",
@@ -118,7 +118,7 @@ export const cars = [
       horsepower: 362,
       drivetrain: "AWD",
       fuel: "Hybrid",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/grandhighlander/HYBRID_MAX/2.png"
+      image: "/cars/highlander.webp"
     },
     {
       name: "Toyota 4Runner",
@@ -129,7 +129,7 @@ export const cars = [
       horsepower: 270,
       drivetrain: "4x4",
       fuel: "Gas",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/4runner/TRD_PRO/2.png"
+      image: "/cars/4runner.webp"
     },
     {
       name: "Toyota Venza",
@@ -140,7 +140,7 @@ export const cars = [
       horsepower: 219,
       drivetrain: "AWD",
       fuel: "Hybrid",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/venza/LIMITED/2.png"
+      image: "/cars/venza.png"
     },
     {
       name: "Toyota Sequoia",
@@ -151,7 +151,7 @@ export const cars = [
       horsepower: 437,
       drivetrain: "AWD",
       fuel: "Hybrid",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/sequoia/TRD_PRO/2.png"
+      image: "/cars/sequioa.avif"
     },
     {
       name: "Toyota Sienna",
@@ -162,7 +162,7 @@ export const cars = [
       horsepower: 245,
       drivetrain: "AWD",
       fuel: "Hybrid",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/sienna/PLATINUM/3.png"
+      image: "/cars/sienna.avif"
     },
     {
       name: "Toyota Tacoma",
@@ -173,7 +173,7 @@ export const cars = [
       horsepower: 278,
       drivetrain: "4x4",
       fuel: "Gas",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/tacoma/TRD_OFF-ROAD/3.png"
+      image: "/cars/tacoma.webp"
     },
     {
       name: "Toyota Tundra",
@@ -184,7 +184,7 @@ export const cars = [
       horsepower: 389,
       drivetrain: "4x4",
       fuel: "Hybrid",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/tundra/TRD_PRO/2.png"
+      image: "/cars/tundra.avif"
     },
     {
       name: "Toyota bZ4X",
@@ -195,7 +195,7 @@ export const cars = [
       horsepower: 214,
       drivetrain: "AWD",
       fuel: "Electric",
-      image: "https://www.toyota.com/imgix/responsive/images/gallery/photos-videos/2024/bz4x/XLE/1.png"
+      image: "/cars/bz4x.avif"
     }
   ];
   
