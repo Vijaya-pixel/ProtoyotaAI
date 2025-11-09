@@ -1,7 +1,7 @@
 ﻿.intro-container {
     position: fixed;
     inset: 0;
-    background: #000;
+    background: #3a3a3a;
     display: grid;
     place-items: center;
     z-index: 9999;
