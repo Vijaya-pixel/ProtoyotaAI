@@ -15,19 +15,81 @@ function normalize(text) {
     .trim();
 }
 
-// Function to extract recommended car names from AI response
+// Validate user input for unrealistic values
+function validateInput(text) {
+  const lowerText = text.toLowerCase();
+  const errors = [];
+
+  // Check for unrealistic seat numbers
+  const seatMatch = text.match(/(\d+)\s*seat/i);
+  if (seatMatch) {
+    const seats = parseInt(seatMatch[1]);
+    if (seats > 7) {
+      errors.push("Toyota vehicles offer between 2 and 7 seats. The largest options (Sienna, Sequoia, Highlander, Grand Highlander) seat 7. Would that work for you?");
+    } else if (seats < 1) {
+      errors.push("A vehicle needs at least 2 seats. How many passengers do you need to accommodate?");
+    }
+  }
+
+  // Check for unrealistic budget
+  const budgetMatch = text.match(/\$?\s*(\d+)(?:,(\d+))?(?:k)?\s*(?:budget|price|cost)?/i);
+  if (budgetMatch && (lowerText.includes('budget') || lowerText.includes('price') || lowerText.includes('cost') || lowerText.includes('$'))) {
+    const amount = budgetMatch[2] ? 
+      parseInt(budgetMatch[1] + budgetMatch[2]) : 
+      (text.toLowerCase().includes('k') ? parseInt(budgetMatch[1]) * 1000 : parseInt(budgetMatch[1]));
+    
+    if (amount < 15000 && amount > 100) {
+      errors.push("Toyota vehicles typically range from around $22,000 to $80,000. What's your realistic budget?");
+    } else if (amount > 100000) {
+      errors.push("Most Toyota vehicles range from $22,000 to $80,000. Looking at the premium end of that range?");
+    }
+  }
+
+  // Check for unrealistic MPG
+  const mpgMatch = text.match(/(\d+)\s*mpg/i);
+  if (mpgMatch) {
+    const mpg = parseInt(mpgMatch[1]);
+    if (mpg > 140) {
+      errors.push("Current Toyota vehicles offer up to 57 MPG for hybrids and 119 MPGe for electric. What's your target fuel efficiency?");
+    }
+  }
+
+  return errors.length > 0 ? errors[0] : null;
+}
+
+// Function to detect if AI is making a final recommendation (1-2 models)
 function extractRecommendations(message) {
+  const lowerMessage = message.toLowerCase();
+  
+  // Check for recommendation keywords
+  const hasRecommendationKeywords = 
+    lowerMessage.includes('recommend') ||
+    lowerMessage.includes('suggest') ||
+    lowerMessage.includes('perfect fit') ||
+    lowerMessage.includes('best choice') ||
+    lowerMessage.includes('ideal') ||
+    lowerMessage.includes('top pick') ||
+    lowerMessage.includes('would be') ||
+    lowerMessage.includes('great option') ||
+    (lowerMessage.includes('check out') && lowerMessage.includes('the'));
+  
+  // Only proceed if recommendation keywords are present
+  if (!hasRecommendationKeywords) {
+    return [];
+  }
+  
   const carNames = cars.map(car => car.name);
   const recommendations = [];
   
   for (const carName of carNames) {
     // Check if car name appears in the message (case insensitive)
-    if (message.toLowerCase().includes(carName.toLowerCase())) {
+    if (lowerMessage.includes(carName.toLowerCase())) {
       recommendations.push(carName);
     }
   }
   
-  return recommendations;
+  // Only return recommendations if 1-2 models are mentioned
+  return recommendations.length >= 1 && recommendations.length <= 2 ? recommendations : [];
 }
 
 export default function ChatBot() {
@@ -57,6 +119,24 @@ export default function ChatBot() {
   const sendMessage = async () => {
     const original = input.trim();
     if (!original || loading) return;
+
+    // Validate input for unrealistic values
+    const validationError = validateInput(original);
+    if (validationError) {
+      // Show user message in UI
+      const userUI = { role: "user", content: original };
+      setMessages((prev) => [...prev, userUI]);
+      
+      // Show validation error as bot response
+      const errorBot = { role: "assistant", content: validationError };
+      setMessages((prev) => [...prev, errorBot]);
+      
+      // Add to chat history
+      setChatHistory((prev) => [...prev, { role: "user", content: original }, errorBot]);
+      
+      setInput("");
+      return;
+    }
 
     const cleaned = normalize(original);
 
