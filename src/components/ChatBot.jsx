@@ -99,7 +99,13 @@ export default function ChatBot() {
         {loading && (
           <div className="msg assistant">
             <div className="msg__avatar"><Bot /></div>
-            <div className="msg__bubble">...</div>
+            <div className="msg__bubble">
+              <div className="typing">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
           </div>
         )}
 

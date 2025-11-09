@@ -1,6 +1,12 @@
 .home-container {
   text-align: center;
   padding-top: 100px;
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+[data-theme="dark"] .home-container {
+  background: #0f172a;
 }
 
 .home-header {
@@ -23,6 +29,11 @@
   color: #6b7280;
   font-size: 1.2rem;
   margin-bottom: 40px;
+  transition: color 0.3s ease;
+}
+
+[data-theme="dark"] .home-subtitle {
+  color: #94a3b8;
 }
 
 .home-buttons {
@@ -56,4 +67,14 @@
 
 .home-btn.secondary:hover {
   background: #e8f0ff;
+}
+
+[data-theme="dark"] .home-btn.secondary {
+  background: #1e293b;
+  color: #60a5fa;
+  border-color: #60a5fa;
+}
+
+[data-theme="dark"] .home-btn.secondary:hover {
+  background: #334155;
 }

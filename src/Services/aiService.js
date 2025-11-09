@@ -26,8 +26,13 @@ export const generateResponse = async (messages) => {
 
     const data = await response.json();
     const reply = data?.choices?.[0]?.message?.content?.trim();
-    // Remove special tokens that sometimes appear in the response
-    const cleanedReply = reply?.replace(/<[｜|]\s*begin[▁_]\s*of[▁_]\s*sentence\s*[｜|]>/gi, '').trim();
+    // Remove special tokens, HTML tags, and markdown formatting
+    const cleanedReply = reply
+      ?.replace(/<[｜|]\s*begin[▁_]\s*of[▁_]\s*sentence\s*[｜|]>/gi, '')
+      ?.replace(/<[^>]*>/g, '') // Remove HTML tags
+      ?.replace(/\*\*/g, '') // Remove ** markdown bold
+      ?.replace(/\*/g, '') // Remove * markdown
+      ?.trim();
     return cleanedReply ?? "Can you rephrase that?";
   } catch (error) {
     console.error("OpenRouter API Error:", error);
@@ -44,7 +49,7 @@ You are ToyotaBot, a professional Toyota dealership advisor.
 STYLE
 - Clear, short answers (2–4 sentences).
 - No emojis, no hype.
-- Use <b>bold</b> for model names.
+- Use plain text only, no markdown or HTML formatting.
 
 BEHAVIOR
 - Understand typos and infer intent.
