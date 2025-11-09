@@ -6,10 +6,13 @@ export default function Navbar() {
   return (
     <nav className="nav">
       <div className="nav-left">
-        <Link to="/" className="nav-logo">Protoyota</Link>
       </div>
 
-      <div className="nav-links">
+      <div className="nav-center">
+        <Link to="/" className="nav-logo">Protoyota v0.67</Link>
+      </div>
+
+      <div className="nav-right">
         <Link to="/assistant">AI Advisor</Link>
         <Link to="/catalog">Browse Models</Link>
       </div>
