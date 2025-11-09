@@ -16,6 +16,7 @@
     grid-template-rows: auto 1fr auto;
     font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
     color: var(--ink);
+    padding-top: 80px;
   }
   
   /* Header */

@@ -5,6 +5,7 @@
     flex-direction: column;
     color: #fff;
     font-family: "Inter", sans-serif;
+    padding-top: 80px;
   }
   
   .assistant-chat {
