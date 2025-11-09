@@ -196,6 +196,35 @@
   .chat__composer button:disabled{opacity:.5; cursor:not-allowed}
   .chat__composer button:hover:not(:disabled){transform: translateY(-1px)}
 
+  /* Recommendation button */
+  .recommendation-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .view-catalog-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--toyota);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(235, 10, 30, 0.3);
+  }
+
+  .view-catalog-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(235, 10, 30, 0.4);
+    background: #c40718;
+  }
+
   /* Mobile responsiveness */
   @media (max-width: 768px) {
     .chat {

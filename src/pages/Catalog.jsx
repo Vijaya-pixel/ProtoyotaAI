@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { cars } from "../data/cars";
 import "./Catalog.css";
@@ -12,8 +12,34 @@ export default function Catalog() {
   const [showCompare, setShowCompare] = useState(false);
   const [showDealership, setShowDealership] = useState(false);
   const [dealershipCar, setDealershipCar] = useState(null);
+  const [recommendedCars, setRecommendedCars] = useState([]);
+  const carRefs = useRef({});
 
   const categories = ["All", ...new Set(cars.map(car => car.category))];
+
+  // Check for recommended cars from chatbot
+  useEffect(() => {
+    const recommended = sessionStorage.getItem('recommendedCars');
+    if (recommended) {
+      const carNames = JSON.parse(recommended);
+      setRecommendedCars(carNames);
+      
+      // Scroll to the first recommended car after a short delay
+      setTimeout(() => {
+        if (carNames.length > 0 && carRefs.current[carNames[0]]) {
+          carRefs.current[carNames[0]].scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+          });
+        }
+      }, 300);
+      
+      // Clear after scrolling
+      setTimeout(() => {
+        sessionStorage.removeItem('recommendedCars');
+      }, 5000);
+    }
+  }, []);
 
   const toggleSelectCar = (car) => {
     if (selectedCars.includes(car)) {
@@ -61,40 +87,45 @@ export default function Catalog() {
 
       {/* CAR GRID */}
       <div className="car-grid">
-        {filteredCars.map((car, index) => (
-          <div
-            key={index}
-            className={`car-card ${selectedCars.includes(car) ? "selected" : ""}`}
-          >
-            <img className="car-image" src={car.image} alt={car.name} />
+        {filteredCars.map((car, index) => {
+          const isRecommended = recommendedCars.includes(car.name);
+          return (
+            <div
+              key={index}
+              ref={el => carRefs.current[car.name] = el}
+              className={`car-card ${selectedCars.includes(car) ? "selected" : ""} ${isRecommended ? "recommended" : ""}`}
+            >
+              {isRecommended && <div className="recommended-badge">AI Recommended</div>}
+              <img className="car-image" src={car.image} alt={car.name} />
 
-            <div className="car-name">{car.name}</div>
-            <div className="car-details">
-              ${car.price.toLocaleString()} • {car.category} • {car.seats} seats
+              <div className="car-name">{car.name}</div>
+              <div className="car-details">
+                ${car.price.toLocaleString()} • {car.category} • {car.seats} seats
+              </div>
+
+              <button 
+                className="compare-button-small"
+                onClick={() => toggleSelectCar(car)}
+              >
+                {selectedCars.includes(car) ? "Remove from Compare" : "Add to Compare"}
+              </button>
+
+              <button
+                className="compare-button-small"
+                onClick={() => { setFinanceCar(car); setShowFinance(true); }}
+              >
+                Finance Calculator
+              </button>
+
+              <button
+                className="compare-button-small"
+                onClick={() => { setDealershipCar(car); setShowDealership(true); }}
+              >
+                Find Dealership
+              </button>
             </div>
-
-            <button 
-              className="compare-button-small"
-              onClick={() => toggleSelectCar(car)}
-            >
-              {selectedCars.includes(car) ? "Remove from Compare" : "Add to Compare"}
-            </button>
-
-            <button
-              className="compare-button-small"
-              onClick={() => { setFinanceCar(car); setShowFinance(true); }}
-            >
-              Finance Calculator
-            </button>
-
-            <button
-              className="compare-button-small"
-              onClick={() => { setDealershipCar(car); setShowDealership(true); }}
-            >
-              Find Dealership
-            </button>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* FINANCE MODAL */}

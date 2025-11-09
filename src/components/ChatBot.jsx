@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Bot, User, Send, RefreshCw } from "lucide-react";
+import { Bot, User, Send, RefreshCw, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import "./ChatBot.css";
 import { generateResponse, createSystemPrompt } from "../Services/aiService";
+import { cars } from "../data/cars";
 
 // (Optional improvement) light typo normalization
 function normalize(text) {
@@ -13,10 +15,26 @@ function normalize(text) {
     .trim();
 }
 
+// Function to extract recommended car names from AI response
+function extractRecommendations(message) {
+  const carNames = cars.map(car => car.name);
+  const recommendations = [];
+  
+  for (const carName of carNames) {
+    // Check if car name appears in the message (case insensitive)
+    if (message.toLowerCase().includes(carName.toLowerCase())) {
+      recommendations.push(carName);
+    }
+  }
+  
+  return recommendations;
+}
+
 export default function ChatBot() {
   const initialAssistantMessage =
     "Hi — I'm your Toyota Advisor. What will you primarily use the vehicle for? (Commute, Family, Work, Travel)";
 
+  const navigate = useNavigate();
   const [messages, setMessages] = useState([
     { role: "assistant", content: initialAssistantMessage }
   ]);
@@ -29,6 +47,7 @@ export default function ChatBot() {
 
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [recommendedCars, setRecommendedCars] = useState([]);
   const bottomRef = useRef(null);
 
   useEffect(() => {
@@ -57,6 +76,12 @@ export default function ChatBot() {
     const reply = await generateResponse(updatedHistory);
     const bot = { role: "assistant", content: reply };
 
+    // Check if this message contains car recommendations
+    const recommendations = extractRecommendations(reply);
+    if (recommendations.length > 0) {
+      setRecommendedCars(recommendations);
+    }
+
     // Update UI
     setMessages((prev) => [...prev, bot]);
 
@@ -74,6 +99,13 @@ export default function ChatBot() {
       { role: "assistant", content: initialAssistantMessage }
     ]);
     setInput("");
+    setRecommendedCars([]);
+  };
+
+  const goToCatalog = () => {
+    // Store recommended cars in sessionStorage
+    sessionStorage.setItem('recommendedCars', JSON.stringify(recommendedCars));
+    navigate('/catalog');
   };
 
   return (
@@ -106,6 +138,15 @@ export default function ChatBot() {
                 <span></span>
               </div>
             </div>
+          </div>
+        )}
+
+        {recommendedCars.length > 0 && !loading && (
+          <div className="recommendation-button-container">
+            <button className="view-catalog-button" onClick={goToCatalog}>
+              <span>View {recommendedCars.length > 1 ? 'Recommendations' : 'Recommendation'} in Catalog</span>
+              <ArrowRight size={18} />
+            </button>
           </div>
         )}
 
