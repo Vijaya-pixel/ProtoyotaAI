@@ -106,7 +106,20 @@ function FinanceModal({ car, close }) {
   const loanAmount = car.price - down;
   const monthlyRate = rate / 100 / 12;
   const months = years * 12;
-  const monthlyPayment = (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+  
+  // Handle 0% interest rate separately
+  let monthlyPayment;
+  let paymentMessage;
+  
+  if (loanAmount <= 0 || months <= 0) {
+    paymentMessage = "Please enter valid values";
+  } else if (rate === 0) {
+    monthlyPayment = loanAmount / months;
+    paymentMessage = `$${monthlyPayment.toFixed(2)}`;
+  } else {
+    monthlyPayment = (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+    paymentMessage = `$${monthlyPayment.toFixed(2)}`;
+  }
 
   return (
     <div className="modal-overlay">
@@ -122,7 +135,7 @@ function FinanceModal({ car, close }) {
         <label>Loan Term (Years)</label>
         <input type="number" value={years} onChange={(e) => setYears(Number(e.target.value))} />
 
-        <h3>Estimated Monthly Payment: <strong>${monthlyPayment.toFixed(2)}</strong></h3>
+        <h3>Estimated Monthly Payment: <strong>{paymentMessage}</strong></h3>
 
         <button className="close-button" onClick={close}>Close</button>
       </div>
