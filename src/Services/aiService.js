@@ -1,7 +1,7 @@
 // src/Services/aiService.js
 
-// ✅ PASTE YOUR OPENROUTER KEY HERE (not the DeepSeek key)
-const OPENROUTER_API_KEY = "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";
+// ✅ API key loaded from environment variable
+const OPENROUTER_API_KEY = process.env.REACT_APP_OPENROUTER_API_KEY;
 
 export const generateResponse = async (messages) => {
   try {
@@ -14,7 +14,7 @@ export const generateResponse = async (messages) => {
         "X-Title": "Toyota Advisor"              // ✅ identifies your app
       },
       body: JSON.stringify({
-        model: "deepseek/deepseek-chat",
+        model: "deepseek/deepseek-chat-v3.1:free",
         messages,
         temperature: 0.65,
         top_p: 0.9,
@@ -26,7 +26,9 @@ export const generateResponse = async (messages) => {
 
     const data = await response.json();
     const reply = data?.choices?.[0]?.message?.content?.trim();
-    return reply ?? "Can you rephrase that?";
+    // Remove special tokens that sometimes appear in the response
+    const cleanedReply = reply?.replace(/<[｜|]\s*begin[▁_]\s*of[▁_]\s*sentence\s*[｜|]>/gi, '').trim();
+    return cleanedReply ?? "Can you rephrase that?";
   } catch (error) {
     console.error("OpenRouter API Error:", error);
     return "I'm having trouble connecting to the Toyota advisor. Try again in a moment.";
