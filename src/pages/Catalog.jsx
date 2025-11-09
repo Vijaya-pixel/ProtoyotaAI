@@ -23,7 +23,7 @@ export default function Catalog() {
   };
 
   const filteredCars = cars.filter(car =>
-    (selectedCategory === "All" || 2car.category === selectedCategory) &&
+    (selectedCategory === "All" || car.category === selectedCategory) && // <-- fixed here
     car.name.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -40,7 +40,10 @@ export default function Catalog() {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <select onChange={(e) => setSelectedCategory(e.target.value)}>
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
           {categories.map((cat, i) => (
             <option key={i} value={cat}>{cat}</option>
           ))}
