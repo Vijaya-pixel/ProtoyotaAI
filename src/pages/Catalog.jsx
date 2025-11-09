@@ -134,23 +134,62 @@ function FinanceModal({ car, close }) {
 function CompareModal({ cars, close }) {
   const [carA, carB] = cars;
 
+  // Helper function to compare values and return class + symbol
+  const getComparison = (valA, valB, lowerIsBetter = false) => {
+    if (valA === valB) return { symbolA: "=", symbolB: "=", classA: "equal", classB: "equal" };
+    
+    if (lowerIsBetter) {
+      if (valA < valB) return { symbolA: "<", symbolB: ">", classA: "better", classB: "worse" };
+      return { symbolA: ">", symbolB: "<", classA: "worse", classB: "better" };
+    } else {
+      if (valA > valB) return { symbolA: ">", symbolB: "<", classA: "better", classB: "worse" };
+      return { symbolA: "<", symbolB: ">", classA: "worse", classB: "better" };
+    }
+  };
+
+  const priceComp = getComparison(carA.price, carB.price, true); // Lower price is better
+  const hpComp = getComparison(carA.horsepower, carB.horsepower); // Higher HP is better
+  const mpgComp = getComparison(carA.mpg, carB.mpg); // Higher MPG is better
+
   return (
     <div className="modal-overlay">
       <div className="compare-modal">
         <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Compare Models</h2>
 
         <div className="compare-cars">
-          {[carA, carB].map((car, i) => (
-            <div key={i} className="compare-car-card">
-              <img src={car.image} alt={car.name} />
-              <h3>{car.name}</h3>
-              <p>${car.price.toLocaleString()}</p>
-              <p>{car.category} • {car.seats} seats</p>
-              <p>{car.horsepower} HP</p>
-              <p>{car.mpg} MPG</p>
-              <p>{car.fuel}</p>
-            </div>
-          ))}
+          {/* Car A */}
+          <div className="compare-car-card">
+            <img src={carA.image} alt={carA.name} />
+            <h3>{carA.name}</h3>
+            <p className={`compare-stat ${priceComp.classA}`}>
+              ${carA.price.toLocaleString()} <span className="compare-symbol">{priceComp.symbolA}</span>
+            </p>
+            <p>{carA.category} • {carA.seats} seats</p>
+            <p className={`compare-stat ${hpComp.classA}`}>
+              {carA.horsepower} HP <span className="compare-symbol">{hpComp.symbolA}</span>
+            </p>
+            <p className={`compare-stat ${mpgComp.classA}`}>
+              {carA.mpg} MPG <span className="compare-symbol">{mpgComp.symbolA}</span>
+            </p>
+            <p>{carA.fuel}</p>
+          </div>
+
+          {/* Car B */}
+          <div className="compare-car-card">
+            <img src={carB.image} alt={carB.name} />
+            <h3>{carB.name}</h3>
+            <p className={`compare-stat ${priceComp.classB}`}>
+              <span className="compare-symbol">{priceComp.symbolB}</span> ${carB.price.toLocaleString()}
+            </p>
+            <p>{carB.category} • {carB.seats} seats</p>
+            <p className={`compare-stat ${hpComp.classB}`}>
+              <span className="compare-symbol">{hpComp.symbolB}</span> {carB.horsepower} HP
+            </p>
+            <p className={`compare-stat ${mpgComp.classB}`}>
+              <span className="compare-symbol">{mpgComp.symbolB}</span> {carB.mpg} MPG
+            </p>
+            <p>{carB.fuel}</p>
+          </div>
         </div>
 
         <button className="close-button" onClick={close}>Close</button>

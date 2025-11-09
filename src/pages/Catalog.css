@@ -246,6 +246,49 @@
   .compare-car-card p {
     color: inherit;
   }
+
+  .compare-stat {
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+  }
+
+  .compare-stat.better {
+    background: rgba(34, 197, 94, 0.15);
+    color: #16a34a;
+  }
+
+  [data-theme="dark"] .compare-stat.better {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+  }
+
+  .compare-stat.worse {
+    background: rgba(239, 68, 68, 0.15);
+    color: #dc2626;
+  }
+
+  [data-theme="dark"] .compare-stat.worse {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+  }
+
+  .compare-stat.equal {
+    background: rgba(107, 114, 128, 0.15);
+    color: #4b5563;
+  }
+
+  [data-theme="dark"] .compare-stat.equal {
+    background: rgba(107, 114, 128, 0.2);
+    color: #9ca3af;
+  }
+
+  .compare-symbol {
+    font-weight: 700;
+    font-size: 1.1em;
+    margin: 0 4px;
+  }
   
   .close-button {
     margin-top: 20px;

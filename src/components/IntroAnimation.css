@@ -1,7 +1,8 @@
 ﻿.intro-container {
     position: fixed;
     inset: 0;
-    background: #3a3a3a;
+    background: #000000;
+    background-color: rgb(0, 0, 0);
     display: grid;
     place-items: center;
     z-index: 9999;

@@ -5,10 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #ffffff;
+  background: #000000;
   transition: background 0.3s ease;
 }
 
 [data-theme="dark"] body {
-  background: #0f172a;
+  background: #000000;
 }
