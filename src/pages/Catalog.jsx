@@ -9,6 +9,8 @@ export default function Catalog() {
   const [showFinance, setShowFinance] = useState(false);
   const [financeCar, setFinanceCar] = useState(null);
   const [showCompare, setShowCompare] = useState(false);
+  const [showDealership, setShowDealership] = useState(false);
+  const [dealershipCar, setDealershipCar] = useState(null);
 
   const categories = ["All", ...new Set(cars.map(car => car.category))];
 
@@ -21,7 +23,7 @@ export default function Catalog() {
   };
 
   const filteredCars = cars.filter(car =>
-    (selectedCategory === "All" || car.category === selectedCategory) &&
+    (selectedCategory === "All" || car.category === selectedCategory) && // <-- fixed here
     car.name.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -38,7 +40,10 @@ export default function Catalog() {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <select onChange={(e) => setSelectedCategory(e.target.value)}>
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
           {categories.map((cat, i) => (
             <option key={i} value={cat}>{cat}</option>
           ))}
@@ -80,6 +85,13 @@ export default function Catalog() {
             >
               Finance Calculator
             </button>
+
+            <button
+              className="compare-button-small"
+              onClick={() => { setDealershipCar(car); setShowDealership(true); }}
+            >
+              Find Dealership
+            </button>
           </div>
         ))}
       </div>
@@ -92,6 +104,14 @@ export default function Catalog() {
       {/* COMPARE MODAL */}
       {showCompare && selectedCars.length === 2 && (
         <CompareModal cars={selectedCars} close={() => setShowCompare(false)} />
+      )}
+
+      {/* DEALERSHIP MODAL */}
+      {showDealership && dealershipCar && (
+        <DealershipModal 
+          car={dealershipCar} 
+          close={() => setShowDealership(false)} 
+        />
       )}
     </div>
   );
@@ -191,6 +211,34 @@ function CompareModal({ cars, close }) {
             <p>{carB.fuel}</p>
           </div>
         </div>
+
+        <button className="close-button" onClick={close}>Close</button>
+      </div>
+    </div>
+  );
+}
+
+/* --- DEALERSHIP MODAL --- */
+function DealershipModal({ car, close }) {
+  const hardcodedDealerships = [
+    { name: "Toyota of Dallas", address: "2610 Forest Ln, Dallas, TX 75234" },
+    { name: "Cowboy Toyota", address: "9525 E R L Thornton Fwy, Dallas, TX 75228" },
+    { name: "Toyota of Plano", address: "6888 TX-121, Plano, TX 75024" },
+    { name: "Toyota of Richardson", address: "1221 N Central Expy, Richardson, TX 75080" }
+  ];
+
+  return (
+    <div className="modal-overlay">
+      <div className="compare-modal">
+        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Find Dealerships</h2>
+
+        <p>Nearest dealerships for the {car.name}:</p>
+
+        <ul>
+          {hardcodedDealerships.map((dealership, index) => (
+            <li key={index}>{dealership.name} - {dealership.address}</li>
+          ))}
+        </ul>
 
         <button className="close-button" onClick={close}>Close</button>
       </div>
