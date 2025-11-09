@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import { cars } from "../data/cars";
 import "./Catalog.css";
 
@@ -97,21 +98,24 @@ export default function Catalog() {
       </div>
 
       {/* FINANCE MODAL */}
-      {showFinance && financeCar && (
-        <FinanceModal car={financeCar} close={() => setShowFinance(false)} />
+      {showFinance && financeCar && ReactDOM.createPortal(
+        <FinanceModal car={financeCar} close={() => setShowFinance(false)} />,
+        document.body
       )}
 
       {/* COMPARE MODAL */}
-      {showCompare && selectedCars.length === 2 && (
-        <CompareModal cars={selectedCars} close={() => setShowCompare(false)} />
+      {showCompare && selectedCars.length === 2 && ReactDOM.createPortal(
+        <CompareModal cars={selectedCars} close={() => setShowCompare(false)} />,
+        document.body
       )}
 
       {/* DEALERSHIP MODAL */}
-      {showDealership && dealershipCar && (
+      {showDealership && dealershipCar && ReactDOM.createPortal(
         <DealershipModal 
           car={dealershipCar} 
           close={() => setShowDealership(false)} 
-        />
+        />,
+        document.body
       )}
     </div>
   );
