@@ -1,22 +1,29 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar.jsx";
 
-// ✅ Your Home & Catalog are inside /pages
-import Home from "./pages/Home.jsx";
-import Catalog from "./pages/Catalog.jsx";
+import Navbar from "./components/Navbar";
+import CarGallery from "./components/CarGallery";
+import ChatBot from "./components/ChatBot";
+import Home from "./pages/Home";
 
-// ✅ Use ChatBot from /components
-import ChatBot from "./components/ChatBot.jsx";
+import IntroAnimation from "./components/IntroAnimation";
+import "./App.css";
 
-export default function App() {
+function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/assistant" element={<ChatBot />} /> {/* ✅ Chat page */}
-        <Route path="/catalog" element={<Catalog />} />
-      </Routes>
-    </BrowserRouter>
+    <IntroAnimation>
+      <div className="app-content">
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/gallery" element={<CarGallery />} />
+            <Route path="/chat" element={<ChatBot />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </IntroAnimation>
   );
 }
+
+export default App;
