@@ -9,7 +9,7 @@ export default function IntroAnimation({ children }) {
     const timer = setTimeout(() => {
       console.log("[IntroAnimation] hiding intro now");
       setShow(false);
-    }, 3500);
+    }, 3800);
     return () => clearTimeout(timer);
   }, []);
 
@@ -19,7 +19,7 @@ export default function IntroAnimation({ children }) {
     <div className="intro-container">
       <div className="intro-image-wrapper">
         <img 
-          src="/supra-outline.png" 
+          src="/supra-outline2.png" 
           alt="Toyota Supra"
           className="supra-outline"
         />

@@ -6,7 +6,7 @@
     place-items: center;
     z-index: 9999;
     opacity: 1;
-    animation: fadeOutIntro 1s ease forwards 2.5s;
+    animation: fadeOutIntro 1.8s ease forwards 2s;
   }
   
   @keyframes fadeOutIntro {
@@ -75,13 +75,13 @@
     }
   }
   
-  .app-content {
-    opacity: 0;
-    animation: pageFadeIn 1s ease forwards 2.8s;
+.app-content {
+  opacity: 0;
+  animation: pageFadeIn 1s ease forwards;
+}
+
+@keyframes pageFadeIn {
+  to { 
+    opacity: 1; 
   }
-  
-  @keyframes pageFadeIn {
-    to { 
-      opacity: 1; 
-    }
-  }
+}
