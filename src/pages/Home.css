@@ -1,0 +1,76 @@
+.home-hero {
+    background-image: url("https://www.toyota.com/imgix/responsive/images/gallery/hero/2024/camry/hero_1.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .home-overlay {
+    background: rgba(0, 0, 0, 0.55);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .home-content {
+    text-align: center;
+    color: white;
+    max-width: 950px;
+    padding: 40px;
+  }
+  
+  .home-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  
+  .home-content p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    opacity: 0.9;
+  }
+  
+  .home-actions {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .home-action-card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 28px;
+    border-radius: 14px;
+    width: 300px;
+    backdrop-filter: blur(12px);
+    text-decoration: none;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.35);
+    transition: 0.35s ease;
+  }
+  
+  .home-action-card:hover {
+    transform: translateY(-6px);
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.35);
+  }
+  
+  .home-action-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  
+  .home-action-card p {
+    font-size: 0.95rem;
+    opacity: 0.95;
+  }
+  
